@@ -54,7 +54,7 @@ func (m *Tennis) sendMatch() {
 		}
 		if per, ok := m.homeScoreMap[k]; ok {
 			if per == v {
-				SendToTelegram(m, k, per)
+				SendToTelegram(m)
 			}
 		}
 	}
@@ -69,7 +69,7 @@ func (m *Tennis) CheckConditions() bool {
 	}
 	return false
 }
-func SendToTelegram(m *Tennis, period string, score int) {
+func SendToTelegram(m *Tennis) {
 	if !CheckIfExist(fmt.Sprintf("%d", m.id)) {
 		return
 	}
@@ -77,7 +77,7 @@ func SendToTelegram(m *Tennis, period string, score int) {
 	if err != nil {
 		Logging(err)
 	}
-	msg := tgbotapi.NewMessage(ChannelId, CreateMessage(m, period, score))
+	msg := tgbotapi.NewMessage(ChannelId, CreateMessage(m))
 	msg.ParseMode = "html"
 	_, err = bot.Send(msg)
 	if err != nil {
@@ -86,7 +86,7 @@ func SendToTelegram(m *Tennis, period string, score int) {
 	Logging("send message")
 }
 
-func CreateMessage(m *Tennis, period string, score int) string {
+func CreateMessage(m *Tennis) string {
 	message := ""
 	seasName, err := strconv.Unquote("\"" + m.seasonName + "\"")
 	if err != nil {
