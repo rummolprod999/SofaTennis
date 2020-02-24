@@ -48,15 +48,8 @@ func (m *Tennis) sendMatch() {
 	if m.statusType == "notstarted" || m.statusType == "finished" || m.statusType == "canceled" {
 		return
 	}
-	for k, v := range m.awayScoreMap {
-		if !strings.Contains(k, "period") {
-			continue
-		}
-		if per, ok := m.homeScoreMap[k]; ok {
-			if per == v {
-				SendToTelegram(m)
-			}
-		}
+	if m.CheckConditions() {
+		SendToTelegram(m)
 	}
 }
 func (m *Tennis) CheckConditions() bool {
@@ -67,28 +60,58 @@ func (m *Tennis) CheckConditions() bool {
 	if !okAwP1 && !okAwP2 && !okAHP && !okHP2 {
 		return false
 	}
-	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 0 && m.awayScoreMap["period2"] == 4 && m.homeScoreMap["period2"] == 6) || (m.awayScoreMap["period1"] == 0 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 4) {
+	if (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 0 && m.homeScoreMap["period2"] == 4 && m.awayScoreMap["period2"] == 6) || (m.homeScoreMap["period1"] == 4 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 0) {
 		return true
 	}
-	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 0 && m.awayScoreMap["period2"] == 5 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 0 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 5) {
+	if (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 0 && m.homeScoreMap["period2"] == 5 && m.awayScoreMap["period2"] == 7) || (m.homeScoreMap["period1"] == 5 && m.awayScoreMap["period1"] == 7 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 0) {
 		return true
 	}
-	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 0 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 0 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 6) {
+	if (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 0 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 7) || (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 7 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 0) {
 		return true
 	}
-	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 1 && m.awayScoreMap["period2"] == 4 && m.homeScoreMap["period2"] == 6) || (m.awayScoreMap["period1"] == 1 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 4) {
+	if (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 1 && m.homeScoreMap["period2"] == 4 && m.awayScoreMap["period2"] == 6) || (m.homeScoreMap["period1"] == 4 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 1) {
 		return true
 	}
-	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 1 && m.awayScoreMap["period2"] == 5 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 1 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 5) {
+	if (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 1 && m.homeScoreMap["period2"] == 5 && m.awayScoreMap["period2"] == 7) || (m.homeScoreMap["period1"] == 5 && m.awayScoreMap["period1"] == 7 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 1) {
 		return true
 	}
-	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 1 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 1 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 6) {
+	if (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 1 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 7) || (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 7 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 1) {
 		return true
 	}
-	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 2 && m.awayScoreMap["period2"] == 4 && m.homeScoreMap["period2"] == 6) || (m.awayScoreMap["period1"] == 2 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 4) {
+	if (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 2 && m.homeScoreMap["period2"] == 4 && m.awayScoreMap["period2"] == 6) || (m.homeScoreMap["period1"] == 4 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 2) {
 		return true
 	}
-	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 2 && m.awayScoreMap["period2"] == 5 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 2 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 5) {
+	if (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 2 && m.homeScoreMap["period2"] == 5 && m.awayScoreMap["period2"] == 7) || (m.homeScoreMap["period1"] == 5 && m.awayScoreMap["period1"] == 7 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 2) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 2 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 7) || (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 7 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 2) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 0 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 4) || (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 4 && m.homeScoreMap["period2"] == 0 && m.awayScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 0 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 7 && m.awayScoreMap["period2"] == 5) || (m.homeScoreMap["period1"] == 7 && m.awayScoreMap["period1"] == 5 && m.homeScoreMap["period2"] == 0 && m.awayScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 0 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 7 && m.awayScoreMap["period2"] == 6) || (m.homeScoreMap["period1"] == 7 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 0 && m.awayScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 1 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 4) || (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 4 && m.homeScoreMap["period2"] == 1 && m.awayScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 1 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 7 && m.awayScoreMap["period2"] == 5) || (m.homeScoreMap["period1"] == 7 && m.awayScoreMap["period1"] == 5 && m.homeScoreMap["period2"] == 1 && m.awayScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 1 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 7 && m.awayScoreMap["period2"] == 6) || (m.homeScoreMap["period1"] == 7 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 1 && m.awayScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 2 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 6 && m.awayScoreMap["period2"] == 4) || (m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period1"] == 4 && m.homeScoreMap["period2"] == 2 && m.awayScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 2 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 7 && m.awayScoreMap["period2"] == 5) || (m.homeScoreMap["period1"] == 7 && m.awayScoreMap["period1"] == 5 && m.homeScoreMap["period2"] == 2 && m.awayScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.homeScoreMap["period1"] == 2 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 7 && m.awayScoreMap["period2"] == 6) || (m.homeScoreMap["period1"] == 7 && m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period2"] == 2 && m.awayScoreMap["period2"] == 6) {
 		return true
 	}
 	return false

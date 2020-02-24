@@ -16,6 +16,7 @@ type SofaTennis struct {
 func (t *SofaTennis) run() {
 	curDate := time.Now().Format("2006-01-02")
 	UrlSofa := fmt.Sprintf("https://www.sofascore.com/tennis//%s/json?_=%d", curDate, random(1000000000, 9999999999))
+	UrlSofa = "https://www.sofascore.com/tennis/livescore/json"
 	response := DownloadPage(UrlSofa)
 	if response == "" {
 		Logging("got empty string")
@@ -124,6 +125,5 @@ func (t *SofaTennis) TennisMatch(value []byte, dataType jsonparser.ValueType, of
 		return
 	}
 	volT := Tennis{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType), id: id, changeDate: string(changeDate), homeScoreMap: homeScoreMap, awayScoreMap: awayScoreMap, seasonName: t.seasonName, tournamentName: t.tournamentName, categoryName: t.categoryName}
-	volT.printMatch()
 	volT.sendMatch()
 }
