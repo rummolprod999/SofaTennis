@@ -67,6 +67,30 @@ func (m *Tennis) CheckConditions() bool {
 	if !okAwP1 && !okAwP2 && !okAHP && !okHP2 {
 		return false
 	}
+	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 0 && m.awayScoreMap["period2"] == 4 && m.homeScoreMap["period2"] == 6) || (m.awayScoreMap["period1"] == 0 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 4) {
+		return true
+	}
+	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 0 && m.awayScoreMap["period2"] == 5 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 0 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 5) {
+		return true
+	}
+	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 0 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 0 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 1 && m.awayScoreMap["period2"] == 4 && m.homeScoreMap["period2"] == 6) || (m.awayScoreMap["period1"] == 1 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 4) {
+		return true
+	}
+	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 1 && m.awayScoreMap["period2"] == 5 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 1 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 5) {
+		return true
+	}
+	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 1 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 1 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 6) {
+		return true
+	}
+	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 2 && m.awayScoreMap["period2"] == 4 && m.homeScoreMap["period2"] == 6) || (m.awayScoreMap["period1"] == 2 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 6 && m.homeScoreMap["period2"] == 4) {
+		return true
+	}
+	if (m.awayScoreMap["period1"] == 6 && m.homeScoreMap["period1"] == 2 && m.awayScoreMap["period2"] == 5 && m.homeScoreMap["period2"] == 7) || (m.awayScoreMap["period1"] == 2 && m.homeScoreMap["period1"] == 6 && m.awayScoreMap["period2"] == 7 && m.homeScoreMap["period2"] == 5) {
+		return true
+	}
 	return false
 }
 func SendToTelegram(m *Tennis) {
