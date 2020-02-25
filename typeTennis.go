@@ -180,6 +180,7 @@ func CreateMessage(m *Tennis) string {
 		}
 		message += fmt.Sprintf("%s: %d\n", k, v)
 	}
+	message += fmt.Sprintf("<b>Url:</b> %s\n", m.url)
 	message += fmt.Sprintf("\n")
 	return message
 }
