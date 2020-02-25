@@ -20,6 +20,7 @@ type Tennis struct {
 	tournamentName string
 	categoryName   string
 	seasonName     string
+	url            string
 }
 
 func (m *Tennis) printMatch() {
@@ -41,6 +42,7 @@ func (m *Tennis) printMatch() {
 	for k, v := range m.awayScoreMap {
 		fmt.Printf("%s: %d\n", k, v)
 	}
+	fmt.Printf("Url: %s\n", m.url)
 	fmt.Printf("\n\n\n")
 }
 

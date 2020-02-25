@@ -104,6 +104,13 @@ func (t *SofaTennis) TennisMatch(value []byte, dataType jsonparser.ValueType, of
 		//Logging(err, "changeDate")
 		//return
 	}
+	customId, _, _, err := jsonparser.Get(value, "customId")
+	if err != nil {
+	}
+	slug, _, _, err := jsonparser.Get(value, "slug")
+	if err != nil {
+	}
+	url := fmt.Sprintf("https://www.sofascore.com/%s/%s", string(slug), string(customId))
 	homeScoreMap := make(map[string]int)
 	err = jsonparser.ObjectEach(homeScore, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {
 		valInt, _ := strconv.ParseInt(string(value), 10, 32)
@@ -124,6 +131,6 @@ func (t *SofaTennis) TennisMatch(value []byte, dataType jsonparser.ValueType, of
 		Logging(err, "awayScore map", fmt.Sprintf("%s", string(awayScore)))
 		return
 	}
-	volT := Tennis{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType), id: id, changeDate: string(changeDate), homeScoreMap: homeScoreMap, awayScoreMap: awayScoreMap, seasonName: t.seasonName, tournamentName: t.tournamentName, categoryName: t.categoryName}
+	volT := Tennis{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType), id: id, changeDate: string(changeDate), homeScoreMap: homeScoreMap, awayScoreMap: awayScoreMap, seasonName: t.seasonName, tournamentName: t.tournamentName, categoryName: t.categoryName, url: url}
 	volT.sendMatch()
 }
